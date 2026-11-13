@@ -1,0 +1,8 @@
+# ./lib/schema.graphql
+
+type Cart {
+    items: [String!]
+    lastupdated: ISODateTime
+}
+
+scalar ISODateTime

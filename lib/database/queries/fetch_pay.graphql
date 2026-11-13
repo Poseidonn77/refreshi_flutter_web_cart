@@ -1,0 +1,7 @@
+query FetchPay($id: ID!) {
+    FetchPay(id: $id) {
+        hold_request_time
+        pay_capture_time
+        amount_in_cents
+    }
+}
