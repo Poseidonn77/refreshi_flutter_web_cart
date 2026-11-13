@@ -30,17 +30,20 @@ class AccountButton extends StatelessWidget {
                 key: const Key('sign-in'),
                 icon: icon,
                 label: const Text('Sign in'),
+                style: TextButton.styleFrom(
+                  // Readable on the coloured app bar.
+                  foregroundColor: IconTheme.of(context).color,
+                ),
                 onPressed: Nav.signIn,
               );
       }
-      final scheme = Theme.of(context).colorScheme;
       return PopupMenuButton<_Action>(
         key: const Key('account'),
         tooltip: 'Signed in',
         icon: Badge(
           backgroundColor: Colors.green.shade600,
           label: const Icon(Icons.check, size: 10, color: Colors.white),
-          child: Icon(Icons.account_circle, color: scheme.primary),
+          child: const Icon(Icons.account_circle),
         ),
         onSelected: (a) => switch (a) {
           _Action.orders => Nav.orders(),

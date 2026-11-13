@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF4FF"/><stop offset="1" stop-color="#D5E3FF"/></linearGradient></defs>
+<rect width="512" height="512" fill="url(#bg)"/>
+<circle cx="430" cy="80" r="120" fill="#FFFFFF" opacity=".35"/>
+<ellipse cx="256" cy="420" rx="180" ry="20" fill="#1E3A8A" opacity=".12"/>
+
+<g><circle cx="196" cy="228" r="74" fill="#6FA83A"/><circle cx="176" cy="204" r="18" fill="#FFFFFF" opacity=".25"/></g>
+<g><circle cx="318" cy="214" r="70" fill="#7CB342"/><circle cx="298" cy="190" r="17" fill="#FFFFFF" opacity=".25"/></g>
+<g><circle cx="216" cy="332" r="72" fill="#5E9A2E"/><circle cx="196" cy="308" r="17" fill="#FFFFFF" opacity=".25"/></g>
+<g><circle cx="340" cy="334" r="72" fill="#4E8A25"/><circle cx="340" cy="334" r="62" fill="#F1F6D8"/><circle cx="340" cy="334" r="56" fill="#CFE37E"/>
+<g stroke="#F1F6D8" stroke-width="5"><line x1="340" y1="278" x2="340" y2="390"/><line x1="284" y1="334" x2="396" y2="334"/><line x1="300" y1="294" x2="380" y2="374"/><line x1="380" y1="294" x2="300" y2="374"/></g>
+<circle cx="340" cy="334" r="8" fill="#F1F6D8"/></g>
+</svg>

@@ -13,6 +13,9 @@ class Product {
   /// e.g. `14.50`.
   String get price => formatCents(priceInCents);
 
+  /// Bundled catalog image, e.g. `assets/images/products/pizza.png`.
+  String get imageAsset => 'assets/images/products/$id.png';
+
   static String formatCents(int cents) => (cents / 100).toStringAsFixed(2);
 
   /// The single merchant's catalog.

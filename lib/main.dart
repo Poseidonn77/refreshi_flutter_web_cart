@@ -1,9 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:get/get.dart';
-import 'package:material_ui/material_ui.dart' show DefaultMaterialLocalizations;
+import 'package:material_ui/material_ui.dart'
+    show DefaultMaterialLocalizations, Theme;
 
 import 'app/app_pages.dart';
+import 'app/app_theme.dart';
 import 'app/nav.dart';
 import 'controller/sign_in_controller.dart';
 import 'services/cart_service.dart';
@@ -34,6 +36,14 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Cart for Lovable Food',
       debugShowCheckedModeBanner: false,
+      // GetMaterialApp's `theme` is the framework's ThemeData type, which
+      // `material_ui` widgets don't read, so apply our theme here instead.
+      builder: (context, child) => Theme(
+        data: MediaQuery.platformBrightnessOf(context) == Brightness.dark
+            ? AppTheme.dark
+            : AppTheme.light,
+        child: child!,
+      ),
       // GetMaterialApp wraps the framework's MaterialApp, which only provides
       // the framework's localizations. Widgets from `material_ui` look up their
       // own MaterialLocalizations type, so register its delegate too.

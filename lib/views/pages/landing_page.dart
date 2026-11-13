@@ -47,15 +47,12 @@ class LandingPage extends StatelessWidget {
               padding: padding,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: context.gridColumns,
-                mainAxisExtent: 88,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
+                childAspectRatio: 0.82,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
               ),
               itemCount: products.length,
-              itemBuilder: (_, i) => Card(
-                clipBehavior: Clip.antiAlias,
-                child: Center(child: ProductTile(product: products[i])),
-              ),
+              itemBuilder: (_, i) => ProductCard(product: products[i]),
             ),
     );
   }

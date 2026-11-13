@@ -26,6 +26,10 @@ class CartButton extends StatelessWidget {
         child: compact
             ? IconButton(onPressed: Nav.cart, icon: icon)
             : TextButton.icon(
+                style: TextButton.styleFrom(
+                  // Readable on the coloured app bar.
+                  foregroundColor: IconTheme.of(context).color,
+                ),
                 onPressed: Nav.cart,
                 icon: icon,
                 label: const Text('Cart'),
