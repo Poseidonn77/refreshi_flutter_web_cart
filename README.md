@@ -7,9 +7,18 @@ Web-only Flutter demo of a cart → checkout → order flow (GetX, GraphQL, Hive
 ```sh
 flutter pub get
 dart run build_runner build          # regenerate *.graphql.dart after editing .graphql files
-flutter run -d chrome --dart-define=GRAPHQL_ENDPOINT=http://localhost:4000/graphql
+flutter run -d chrome                # demo mode: offline sample data, no server needed
 flutter test
 ```
+
+To use a real GraphQL server instead of the built-in demo data
+(`lib/database/demo_link.dart`, ids `1`–`3`):
+
+```sh
+flutter run -d chrome --dart-define=GRAPHQL_ENDPOINT=http://localhost:4000/graphql
+```
+
+The server must allow CORS from the Flutter dev origin, or the browser reports `Failed to fetch`.
 
 ## Layout
 

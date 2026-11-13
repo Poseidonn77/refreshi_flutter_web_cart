@@ -1,0 +1,19 @@
+query FetchOrders {
+  fetchOrders {
+    id
+    dateOfOrder
+    status
+    timeSlotStart
+    timeSlotEnd
+    cart {
+      id
+      items
+    }
+    pay {
+      id
+      amountInCents
+      holdRequestTime
+      payCaptureTime
+    }
+  }
+}

@@ -13,7 +13,7 @@ class Variables$Query$FetchCart {
   factory Variables$Query$FetchCart.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
-    result$data['id'] = (l$id as String);
+    result$data['id'] = fromJsonId(l$id);
     return Variables$Query$FetchCart._(result$data);
   }
 
@@ -24,7 +24,7 @@ class Variables$Query$FetchCart {
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
-    result$data['id'] = l$id;
+    result$data['id'] = toJsonId(l$id);
     return result$data;
   }
 
@@ -434,7 +434,7 @@ class Query$FetchCart$fetchCart {
     final l$lastUpdated = json['lastUpdated'];
     final l$$__typename = json['__typename'];
     return Query$FetchCart$fetchCart(
-      id: (l$id as String),
+      id: fromJsonId(l$id),
       items: (l$items as List<dynamic>?)?.map((e) => (e as String)).toList(),
       lastUpdated: l$lastUpdated == null
           ? null
@@ -454,7 +454,7 @@ class Query$FetchCart$fetchCart {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    _resultData['id'] = toJsonId(l$id);
     final l$items = items;
     _resultData['items'] = l$items?.map((e) => e).toList();
     final l$lastUpdated = lastUpdated;

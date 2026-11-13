@@ -2,6 +2,7 @@ query FetchOrder($id: ID!) {
   fetchOrder(id: $id) {
     id
     dateOfOrder
+    status
     timeSlotStart
     timeSlotEnd
     cart {

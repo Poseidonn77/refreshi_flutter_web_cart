@@ -5,9 +5,20 @@ targets:
         options:
           clients:
             - graphql
+          # Lenient converters: see lib/database/scalars.dart.
           scalars:
             ISODateTime:
               type: DateTime
               fromJsonFunctionName: fromJsonIsoDateTime
               toJsonFunctionName: toJsonIsoDateTime
+              import: package:flutter_webview_cart/database/scalars.dart
+            ID:
+              type: String
+              fromJsonFunctionName: fromJsonId
+              toJsonFunctionName: toJsonId
+              import: package:flutter_webview_cart/database/scalars.dart
+            Int:
+              type: int
+              fromJsonFunctionName: fromJsonInt
+              toJsonFunctionName: toJsonInt
               import: package:flutter_webview_cart/database/scalars.dart

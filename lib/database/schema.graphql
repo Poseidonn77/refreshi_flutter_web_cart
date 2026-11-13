@@ -10,6 +10,35 @@ type Query {
   fetchCart(id: ID!): Cart
   fetchOrder(id: ID!): Order
   fetchPay(id: ID!): Pay
+  # Order history, newest first.
+  fetchOrders: [Order!]!
+}
+
+type Mutation {
+  # Creates order `input.id` with its cart, and holds the payment
+  # (sets Pay.holdRequestTime). The server captures it shortly after
+  # (sets Pay.payCaptureTime) and the order becomes CONFIRMED.
+  placeOrder(input: PlaceOrderInput!): Order
+}
+
+input PlaceOrderInput {
+  # The cart id; the order and its payment share it.
+  id: ID!
+  items: [String!]!
+  amountInCents: Int!
+  timeSlotStart: ISODateTime!
+  timeSlotEnd: ISODateTime!
+}
+
+enum OrderStatus {
+  # Placed; payment is on hold.
+  PLACED
+  # Payment captured; waiting for the delivery slot.
+  CONFIRMED
+  # Inside the delivery slot.
+  OUT_FOR_DELIVERY
+  # Delivery slot has ended.
+  DELIVERED
 }
 
 type Cart {
@@ -32,4 +61,5 @@ type Order {
   pay: Pay
   timeSlotStart: ISODateTime
   timeSlotEnd: ISODateTime
+  status: OrderStatus!
 }

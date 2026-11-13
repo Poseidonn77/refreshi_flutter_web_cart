@@ -1,21 +1,23 @@
-import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
-import '../../app/app_routes.dart';
+import '../../app/nav.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final id = Get.parameters['id'] ?? '';
+    final id = routeIdOf(context);
     return Scaffold(
-      appBar: AppBar(title: Text('Merchant $id')),
+      appBar: AppBar(
+        leading: const AppBackButton(),
+        title: Text('Merchant $id'),
+      ),
       body: const Center(child: Text('Catalog goes here')),
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.shopping_cart),
         label: const Text('View cart'),
-        onPressed: () => Get.toNamed(Routes.cartPath(id)),
+        onPressed: Nav.cart,
       ),
     );
   }

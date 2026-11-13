@@ -2,54 +2,51 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
-import '../app/app_routes.dart';
-import '../services/storage_service.dart';
+import '../app/nav.dart';
 
-/// Sign-in is a timed placeholder: after [redirectDelay] the user is marked
-/// as signed in (Hive) and redirected to `?next=` or the merchants list.
+/// Demo sign-in: a boolean and a timer. Opening the page waits [delay],
+/// flips [isSignedIn] to true, then continues to `?next=` (set by AuthGuard)
+/// or returns to the page that opened it (e.g. checkout).
+/// Not persisted, so a reload signs out.
+/// Signing in is required to place an order and to see orders.
 class SignInController extends GetxController {
-  SignInController({this.redirectDelay = const Duration(seconds: 3)});
+  SignInController({this.delay = const Duration(seconds: 3)});
 
-  final Duration redirectDelay;
-  final RxInt secondsLeft = 0.obs;
+  /// The demo's whole auth state.
+  static final RxBool isSignedIn = false.obs;
 
-  Timer? _redirectTimer;
-  Timer? _ticker;
+  final Duration delay;
+  Timer? _timer;
 
-  String get nextRoute => Get.parameters['next'] ?? Routes.geoMerchants;
+  /// Captured when the route opens (Get.parameters is global).
+  final String? next = Get.parameters['next'];
 
   @override
   void onReady() {
     super.onReady();
-    scheduleRedirect();
-  }
-
-  /// TODO: replace with the real scheduler / auth call.
-  void scheduleRedirect() {
-    cancelRedirect();
-    secondsLeft.value = redirectDelay.inSeconds;
-    _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (secondsLeft.value > 0) secondsLeft.value--;
+    _timer = Timer(delay, () {
+      isSignedIn.value = true;
+      final next = this.next;
+      final nav = Get.key.currentState;
+      if (next != null && next.isNotEmpty) {
+        Get.offNamed<void>(next); // replaces sign-in, so back skips it
+      } else if (nav != null && nav.canPop()) {
+        Get.back<void>();
+      } else {
+        Nav.home();
+      }
     });
-    _redirectTimer = Timer(redirectDelay, _completeSignIn);
   }
 
-  void cancelRedirect() {
-    _redirectTimer?.cancel();
-    _ticker?.cancel();
-  }
-
-  Future<void> _completeSignIn() async {
-    _ticker?.cancel();
-    if (Get.isRegistered<StorageService>()) {
-      await Get.find<StorageService>().setSignedIn(true);
-    }
-    Get.offAllNamed(nextRoute);
+  /// Signs out and goes home (orders are no longer visible).
+  static void signOut() {
+    isSignedIn.value = false;
+    Nav.home();
   }
 
   @override
   void onClose() {
-    cancelRedirect();
+    _timer?.cancel();
     super.onClose();
   }
 }

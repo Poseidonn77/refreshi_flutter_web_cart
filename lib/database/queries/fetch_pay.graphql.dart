@@ -13,7 +13,7 @@ class Variables$Query$FetchPay {
   factory Variables$Query$FetchPay.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
-    result$data['id'] = (l$id as String);
+    result$data['id'] = fromJsonId(l$id);
     return Variables$Query$FetchPay._(result$data);
   }
 
@@ -24,7 +24,7 @@ class Variables$Query$FetchPay {
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
-    result$data['id'] = l$id;
+    result$data['id'] = toJsonId(l$id);
     return result$data;
   }
 
@@ -443,14 +443,16 @@ class Query$FetchPay$fetchPay {
     final l$amountInCents = json['amountInCents'];
     final l$$__typename = json['__typename'];
     return Query$FetchPay$fetchPay(
-      id: (l$id as String),
+      id: fromJsonId(l$id),
       holdRequestTime: l$holdRequestTime == null
           ? null
           : fromJsonIsoDateTime(l$holdRequestTime),
       payCaptureTime: l$payCaptureTime == null
           ? null
           : fromJsonIsoDateTime(l$payCaptureTime),
-      amountInCents: (l$amountInCents as int?),
+      amountInCents: l$amountInCents == null
+          ? null
+          : fromJsonInt(l$amountInCents),
       $__typename: (l$$__typename as String),
     );
   }
@@ -468,7 +470,7 @@ class Query$FetchPay$fetchPay {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    _resultData['id'] = toJsonId(l$id);
     final l$holdRequestTime = holdRequestTime;
     _resultData['holdRequestTime'] = l$holdRequestTime == null
         ? null
@@ -478,7 +480,9 @@ class Query$FetchPay$fetchPay {
         ? null
         : toJsonIsoDateTime(l$payCaptureTime);
     final l$amountInCents = amountInCents;
-    _resultData['amountInCents'] = l$amountInCents;
+    _resultData['amountInCents'] = l$amountInCents == null
+        ? null
+        : toJsonInt(l$amountInCents);
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;

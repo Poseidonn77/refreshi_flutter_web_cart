@@ -1,46 +1,62 @@
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
-import '../../app/app_routes.dart';
+import '../../app/nav.dart';
+import '../../controller/sign_in_controller.dart';
+import '../../models/product.dart';
+import '../modules/account_button.dart';
+import '../modules/cart_button.dart';
+import '../modules/product_tile.dart';
+import '../modules/responsive.dart';
 
+/// Home: the merchant's catalog. App bar: orders (signed in only), cart
+/// badge, account. A list on mobile; a 2/3-column grid on tablet/desktop.
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const products = Product.catalog;
+    final padding = context.pagePadding(flush: true, top: 8, bottom: 24);
     return Scaffold(
-      appBar: AppBar(title: const Text('Lovable Food')),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Sign in',
-        child: const Icon(Icons.person),
-        onPressed: () => Get.toNamed(Routes.signIn),
-      ),
-      // Demo navigation hub; ids are placeholders until real data exists.
-      body: ListView(
-        children: [
-          _NavTile('Merchants near me', Routes.geoMerchants),
-          _NavTile('Merchant details #1', Routes.detailsPath('1')),
-          _NavTile('Cart #1', Routes.cartPath('1')),
-          _NavTile('Checkout #1', Routes.checkoutPath('1')),
-          _NavTile('Order #1', Routes.orderPath('1')),
+      appBar: AppBar(
+        title: const Text('Lovable Food'),
+        actions: [
+          Obx(
+            () => SignInController.isSignedIn.value
+                ? IconButton(
+                    tooltip: 'My orders',
+                    icon: const Icon(Icons.receipt_long),
+                    onPressed: Nav.orders,
+                  )
+                : const SizedBox.shrink(),
+          ),
+          const CartButton(),
+          const AccountButton(),
+          const SizedBox(width: 8),
         ],
       ),
-    );
-  }
-}
-
-class _NavTile extends StatelessWidget {
-  const _NavTile(this.label, this.route);
-
-  final String label;
-  final String route;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(label),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: () => Get.toNamed(route),
+      body: context.isMobile
+          ? ListView(
+              padding: padding,
+              children: [
+                for (final product in products) ProductTile(product: product),
+              ],
+            )
+          : GridView.builder(
+              padding: padding,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: context.gridColumns,
+                mainAxisExtent: 88,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+              ),
+              itemCount: products.length,
+              itemBuilder: (_, i) => Card(
+                clipBehavior: Clip.antiAlias,
+                child: Center(child: ProductTile(product: products[i])),
+              ),
+            ),
     );
   }
 }

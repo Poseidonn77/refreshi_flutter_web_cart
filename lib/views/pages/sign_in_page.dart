@@ -8,14 +8,14 @@ class SignInPage extends GetView<SignInController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const CircularProgressIndicator(),
-            const SizedBox(height: 16),
-            Obx(() => Text('Signing in… ${controller.secondsLeft.value}s')),
+            CircularProgressIndicator(),
+            SizedBox(height: 16),
+            Text('Signing in…'),
           ],
         ),
       ),

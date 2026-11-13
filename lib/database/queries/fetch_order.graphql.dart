@@ -1,3 +1,5 @@
+import '../schema.graphql.dart';
+
 import 'dart:async';
 
 import 'package:flutter_webview_cart/database/scalars.dart';
@@ -13,7 +15,7 @@ class Variables$Query$FetchOrder {
   factory Variables$Query$FetchOrder.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
-    result$data['id'] = (l$id as String);
+    result$data['id'] = fromJsonId(l$id);
     return Variables$Query$FetchOrder._(result$data);
   }
 
@@ -24,7 +26,7 @@ class Variables$Query$FetchOrder {
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
-    result$data['id'] = l$id;
+    result$data['id'] = toJsonId(l$id);
     return result$data;
   }
 
@@ -254,6 +256,13 @@ const documentNodeQueryFetchOrder = DocumentNode(
                 ),
                 FieldNode(
                   name: NameNode(value: 'dateOfOrder'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'status'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -514,6 +523,7 @@ class Query$FetchOrder$fetchOrder {
   Query$FetchOrder$fetchOrder({
     required this.id,
     this.dateOfOrder,
+    required this.status,
     this.timeSlotStart,
     this.timeSlotEnd,
     this.cart,
@@ -524,16 +534,18 @@ class Query$FetchOrder$fetchOrder {
   factory Query$FetchOrder$fetchOrder.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$dateOfOrder = json['dateOfOrder'];
+    final l$status = json['status'];
     final l$timeSlotStart = json['timeSlotStart'];
     final l$timeSlotEnd = json['timeSlotEnd'];
     final l$cart = json['cart'];
     final l$pay = json['pay'];
     final l$$__typename = json['__typename'];
     return Query$FetchOrder$fetchOrder(
-      id: (l$id as String),
+      id: fromJsonId(l$id),
       dateOfOrder: l$dateOfOrder == null
           ? null
           : fromJsonIsoDateTime(l$dateOfOrder),
+      status: fromJson$Enum$OrderStatus((l$status as String)),
       timeSlotStart: l$timeSlotStart == null
           ? null
           : fromJsonIsoDateTime(l$timeSlotStart),
@@ -558,6 +570,8 @@ class Query$FetchOrder$fetchOrder {
 
   final DateTime? dateOfOrder;
 
+  final Enum$OrderStatus status;
+
   final DateTime? timeSlotStart;
 
   final DateTime? timeSlotEnd;
@@ -571,11 +585,13 @@ class Query$FetchOrder$fetchOrder {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    _resultData['id'] = toJsonId(l$id);
     final l$dateOfOrder = dateOfOrder;
     _resultData['dateOfOrder'] = l$dateOfOrder == null
         ? null
         : toJsonIsoDateTime(l$dateOfOrder);
+    final l$status = status;
+    _resultData['status'] = toJson$Enum$OrderStatus(l$status);
     final l$timeSlotStart = timeSlotStart;
     _resultData['timeSlotStart'] = l$timeSlotStart == null
         ? null
@@ -597,6 +613,7 @@ class Query$FetchOrder$fetchOrder {
   int get hashCode {
     final l$id = id;
     final l$dateOfOrder = dateOfOrder;
+    final l$status = status;
     final l$timeSlotStart = timeSlotStart;
     final l$timeSlotEnd = timeSlotEnd;
     final l$cart = cart;
@@ -605,6 +622,7 @@ class Query$FetchOrder$fetchOrder {
     return Object.hashAll([
       l$id,
       l$dateOfOrder,
+      l$status,
       l$timeSlotStart,
       l$timeSlotEnd,
       l$cart,
@@ -630,6 +648,11 @@ class Query$FetchOrder$fetchOrder {
     final l$dateOfOrder = dateOfOrder;
     final lOther$dateOfOrder = other.dateOfOrder;
     if (l$dateOfOrder != lOther$dateOfOrder) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
       return false;
     }
     final l$timeSlotStart = timeSlotStart;
@@ -679,6 +702,7 @@ abstract class CopyWith$Query$FetchOrder$fetchOrder<TRes> {
   TRes call({
     String? id,
     DateTime? dateOfOrder,
+    Enum$OrderStatus? status,
     DateTime? timeSlotStart,
     DateTime? timeSlotEnd,
     Query$FetchOrder$fetchOrder$cart? cart,
@@ -702,6 +726,7 @@ class _CopyWithImpl$Query$FetchOrder$fetchOrder<TRes>
   TRes call({
     Object? id = _undefined,
     Object? dateOfOrder = _undefined,
+    Object? status = _undefined,
     Object? timeSlotStart = _undefined,
     Object? timeSlotEnd = _undefined,
     Object? cart = _undefined,
@@ -713,6 +738,9 @@ class _CopyWithImpl$Query$FetchOrder$fetchOrder<TRes>
       dateOfOrder: dateOfOrder == _undefined
           ? _instance.dateOfOrder
           : (dateOfOrder as DateTime?),
+      status: status == _undefined || status == null
+          ? _instance.status
+          : (status as Enum$OrderStatus),
       timeSlotStart: timeSlotStart == _undefined
           ? _instance.timeSlotStart
           : (timeSlotStart as DateTime?),
@@ -761,6 +789,7 @@ class _CopyWithStubImpl$Query$FetchOrder$fetchOrder<TRes>
   call({
     String? id,
     DateTime? dateOfOrder,
+    Enum$OrderStatus? status,
     DateTime? timeSlotStart,
     DateTime? timeSlotEnd,
     Query$FetchOrder$fetchOrder$cart? cart,
@@ -789,7 +818,7 @@ class Query$FetchOrder$fetchOrder$cart {
     final l$lastUpdated = json['lastUpdated'];
     final l$$__typename = json['__typename'];
     return Query$FetchOrder$fetchOrder$cart(
-      id: (l$id as String),
+      id: fromJsonId(l$id),
       items: (l$items as List<dynamic>?)?.map((e) => (e as String)).toList(),
       lastUpdated: l$lastUpdated == null
           ? null
@@ -809,7 +838,7 @@ class Query$FetchOrder$fetchOrder$cart {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    _resultData['id'] = toJsonId(l$id);
     final l$items = items;
     _resultData['items'] = l$items?.map((e) => e).toList();
     final l$lastUpdated = lastUpdated;
@@ -961,8 +990,10 @@ class Query$FetchOrder$fetchOrder$pay {
     final l$payCaptureTime = json['payCaptureTime'];
     final l$$__typename = json['__typename'];
     return Query$FetchOrder$fetchOrder$pay(
-      id: (l$id as String),
-      amountInCents: (l$amountInCents as int?),
+      id: fromJsonId(l$id),
+      amountInCents: l$amountInCents == null
+          ? null
+          : fromJsonInt(l$amountInCents),
       holdRequestTime: l$holdRequestTime == null
           ? null
           : fromJsonIsoDateTime(l$holdRequestTime),
@@ -986,9 +1017,11 @@ class Query$FetchOrder$fetchOrder$pay {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    _resultData['id'] = toJsonId(l$id);
     final l$amountInCents = amountInCents;
-    _resultData['amountInCents'] = l$amountInCents;
+    _resultData['amountInCents'] = l$amountInCents == null
+        ? null
+        : toJsonInt(l$amountInCents);
     final l$holdRequestTime = holdRequestTime;
     _resultData['holdRequestTime'] = l$holdRequestTime == null
         ? null
