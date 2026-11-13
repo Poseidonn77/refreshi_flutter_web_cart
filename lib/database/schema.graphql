@@ -1,0 +1,35 @@
+# Single source of truth for the GraphQL schema.
+# graphql_codegen scans every *.graphql file under lib/, so types, scalars and
+# the root Query must be defined exactly once (here).
+#
+# Conventions: types are PascalCase, fields/arguments are camelCase.
+
+scalar ISODateTime
+
+type Query {
+  fetchCart(id: ID!): Cart
+  fetchOrder(id: ID!): Order
+  fetchPay(id: ID!): Pay
+}
+
+type Cart {
+  id: ID!
+  items: [String!]
+  lastUpdated: ISODateTime
+}
+
+type Pay {
+  id: ID!
+  holdRequestTime: ISODateTime
+  payCaptureTime: ISODateTime
+  amountInCents: Int
+}
+
+type Order {
+  id: ID!
+  dateOfOrder: ISODateTime
+  cart: Cart
+  pay: Pay
+  timeSlotStart: ISODateTime
+  timeSlotEnd: ISODateTime
+}

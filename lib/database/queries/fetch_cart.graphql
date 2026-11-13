@@ -1,6 +1,7 @@
 query FetchCart($id: ID!) {
-    FetchCart(id: $id) {
-        items
-        lastupdated
-    }
+  fetchCart(id: $id) {
+    id
+    items
+    lastUpdated
+  }
 }

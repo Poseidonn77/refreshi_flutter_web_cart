@@ -1,0 +1,19 @@
+query FetchOrder($id: ID!) {
+  fetchOrder(id: $id) {
+    id
+    dateOfOrder
+    timeSlotStart
+    timeSlotEnd
+    cart {
+      id
+      items
+      lastUpdated
+    }
+    pay {
+      id
+      amountInCents
+      holdRequestTime
+      payCaptureTime
+    }
+  }
+}

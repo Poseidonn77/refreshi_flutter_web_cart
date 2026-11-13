@@ -3,6 +3,11 @@ targets:
     builders:
       graphql_codegen:
         options:
+          clients:
+            - graphql
           scalars:
             ISODateTime:
               type: DateTime
+              fromJsonFunctionName: fromJsonIsoDateTime
+              toJsonFunctionName: toJsonIsoDateTime
+              import: package:flutter_webview_cart/database/scalars.dart

@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:flutter_webview_cart/database/scalars.dart';
 import 'package:gql/ast.dart';
+import 'package:graphql/client.dart' as graphql;
 
 class Variables$Query$FetchPay {
   factory Variables$Query$FetchPay({required String id}) =>
@@ -91,29 +95,29 @@ class _CopyWithStubImpl$Variables$Query$FetchPay<TRes>
 }
 
 class Query$FetchPay {
-  Query$FetchPay({this.FetchPay, this.$__typename = 'Query'});
+  Query$FetchPay({this.fetchPay, this.$__typename = 'Query'});
 
   factory Query$FetchPay.fromJson(Map<String, dynamic> json) {
-    final l$FetchPay = json['FetchPay'];
+    final l$fetchPay = json['fetchPay'];
     final l$$__typename = json['__typename'];
     return Query$FetchPay(
-      FetchPay: l$FetchPay == null
+      fetchPay: l$fetchPay == null
           ? null
-          : Query$FetchPay$FetchPay.fromJson(
-              (l$FetchPay as Map<String, dynamic>),
+          : Query$FetchPay$fetchPay.fromJson(
+              (l$fetchPay as Map<String, dynamic>),
             ),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$FetchPay$FetchPay? FetchPay;
+  final Query$FetchPay$fetchPay? fetchPay;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$FetchPay = FetchPay;
-    _resultData['FetchPay'] = l$FetchPay?.toJson();
+    final l$fetchPay = fetchPay;
+    _resultData['fetchPay'] = l$fetchPay?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -121,9 +125,9 @@ class Query$FetchPay {
 
   @override
   int get hashCode {
-    final l$FetchPay = FetchPay;
+    final l$fetchPay = fetchPay;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$FetchPay, l$$__typename]);
+    return Object.hashAll([l$fetchPay, l$$__typename]);
   }
 
   @override
@@ -134,9 +138,9 @@ class Query$FetchPay {
     if (other is! Query$FetchPay || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$FetchPay = FetchPay;
-    final lOther$FetchPay = other.FetchPay;
-    if (l$FetchPay != lOther$FetchPay) {
+    final l$fetchPay = fetchPay;
+    final lOther$fetchPay = other.fetchPay;
+    if (l$fetchPay != lOther$fetchPay) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -162,8 +166,8 @@ abstract class CopyWith$Query$FetchPay<TRes> {
   factory CopyWith$Query$FetchPay.stub(TRes res) =
       _CopyWithStubImpl$Query$FetchPay;
 
-  TRes call({Query$FetchPay$FetchPay? FetchPay, String? $__typename});
-  CopyWith$Query$FetchPay$FetchPay<TRes> get FetchPay;
+  TRes call({Query$FetchPay$fetchPay? fetchPay, String? $__typename});
+  CopyWith$Query$FetchPay$fetchPay<TRes> get fetchPay;
 }
 
 class _CopyWithImpl$Query$FetchPay<TRes>
@@ -177,26 +181,26 @@ class _CopyWithImpl$Query$FetchPay<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? FetchPay = _undefined,
+    Object? fetchPay = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Query$FetchPay(
-      FetchPay: FetchPay == _undefined
-          ? _instance.FetchPay
-          : (FetchPay as Query$FetchPay$FetchPay?),
+      fetchPay: fetchPay == _undefined
+          ? _instance.fetchPay
+          : (fetchPay as Query$FetchPay$fetchPay?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
     ),
   );
 
-  CopyWith$Query$FetchPay$FetchPay<TRes> get FetchPay {
-    final local$FetchPay = _instance.FetchPay;
-    return local$FetchPay == null
-        ? CopyWith$Query$FetchPay$FetchPay.stub(_then(_instance))
-        : CopyWith$Query$FetchPay$FetchPay(
-            local$FetchPay,
-            (e) => call(FetchPay: e),
+  CopyWith$Query$FetchPay$fetchPay<TRes> get fetchPay {
+    final local$fetchPay = _instance.fetchPay;
+    return local$fetchPay == null
+        ? CopyWith$Query$FetchPay$fetchPay.stub(_then(_instance))
+        : CopyWith$Query$FetchPay$fetchPay(
+            local$fetchPay,
+            (e) => call(fetchPay: e),
           );
   }
 }
@@ -207,10 +211,10 @@ class _CopyWithStubImpl$Query$FetchPay<TRes>
 
   TRes _res;
 
-  call({Query$FetchPay$FetchPay? FetchPay, String? $__typename}) => _res;
+  call({Query$FetchPay$fetchPay? fetchPay, String? $__typename}) => _res;
 
-  CopyWith$Query$FetchPay$FetchPay<TRes> get FetchPay =>
-      CopyWith$Query$FetchPay$FetchPay.stub(_res);
+  CopyWith$Query$FetchPay$fetchPay<TRes> get fetchPay =>
+      CopyWith$Query$FetchPay$fetchPay.stub(_res);
 }
 
 const documentNodeQueryFetchPay = DocumentNode(
@@ -230,7 +234,7 @@ const documentNodeQueryFetchPay = DocumentNode(
       selectionSet: SelectionSetNode(
         selections: [
           FieldNode(
-            name: NameNode(value: 'FetchPay'),
+            name: NameNode(value: 'fetchPay'),
             alias: null,
             arguments: [
               ArgumentNode(
@@ -242,21 +246,28 @@ const documentNodeQueryFetchPay = DocumentNode(
             selectionSet: SelectionSetNode(
               selections: [
                 FieldNode(
-                  name: NameNode(value: 'hold_request_time'),
+                  name: NameNode(value: 'id'),
                   alias: null,
                   arguments: [],
                   directives: [],
                   selectionSet: null,
                 ),
                 FieldNode(
-                  name: NameNode(value: 'pay_capture_time'),
+                  name: NameNode(value: 'holdRequestTime'),
                   alias: null,
                   arguments: [],
                   directives: [],
                   selectionSet: null,
                 ),
                 FieldNode(
-                  name: NameNode(value: 'amount_in_cents'),
+                  name: NameNode(value: 'payCaptureTime'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'amountInCents'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -284,48 +295,190 @@ const documentNodeQueryFetchPay = DocumentNode(
     ),
   ],
 );
+Query$FetchPay _parserFn$Query$FetchPay(Map<String, dynamic> data) =>
+    Query$FetchPay.fromJson(data);
+typedef OnQueryComplete$Query$FetchPay = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$FetchPay?,
+);
 
-class Query$FetchPay$FetchPay {
-  Query$FetchPay$FetchPay({
-    this.hold_request_time,
-    this.pay_capture_time,
-    this.amount_in_cents,
+class Options$Query$FetchPay extends graphql.QueryOptions<Query$FetchPay> {
+  Options$Query$FetchPay({
+    String? operationName,
+    required Variables$Query$FetchPay variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$FetchPay? typedOptimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+    OnQueryComplete$Query$FetchPay? onComplete,
+    graphql.OnQueryError? onError,
+  }) : onCompleteWithParsed = onComplete,
+       super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         pollInterval: pollInterval,
+         context: context,
+         onComplete: onComplete == null
+             ? null
+             : (data) => onComplete(
+                 data,
+                 data == null ? null : _parserFn$Query$FetchPay(data),
+               ),
+         onError: onError,
+         document: documentNodeQueryFetchPay,
+         parserFn: _parserFn$Query$FetchPay,
+       );
+
+  final OnQueryComplete$Query$FetchPay? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onComplete == null
+        ? super.properties
+        : super.properties.where((property) => property != onComplete),
+    onCompleteWithParsed,
+  ];
+}
+
+class WatchOptions$Query$FetchPay
+    extends graphql.WatchQueryOptions<Query$FetchPay> {
+  WatchOptions$Query$FetchPay({
+    String? operationName,
+    required Variables$Query$FetchPay variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$FetchPay? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         document: documentNodeQueryFetchPay,
+         pollInterval: pollInterval,
+         eagerlyFetchResults: eagerlyFetchResults,
+         carryForwardDataOnException: carryForwardDataOnException,
+         fetchResults: fetchResults,
+         parserFn: _parserFn$Query$FetchPay,
+       );
+}
+
+class FetchMoreOptions$Query$FetchPay extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$FetchPay({
+    required graphql.UpdateQuery updateQuery,
+    required Variables$Query$FetchPay variables,
+  }) : super(
+         updateQuery: updateQuery,
+         variables: variables.toJson(),
+         document: documentNodeQueryFetchPay,
+       );
+}
+
+extension ClientExtension$Query$FetchPay on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$FetchPay>> query$FetchPay(
+    Options$Query$FetchPay options,
+  ) async => await this.query(options);
+
+  graphql.ObservableQuery<Query$FetchPay> watchQuery$FetchPay(
+    WatchOptions$Query$FetchPay options,
+  ) => this.watchQuery(options);
+
+  void writeQuery$FetchPay({
+    required Query$FetchPay data,
+    required Variables$Query$FetchPay variables,
+    bool broadcast = true,
+  }) => this.writeQuery(
+    graphql.Request(
+      operation: graphql.Operation(document: documentNodeQueryFetchPay),
+      variables: variables.toJson(),
+    ),
+    data: data.toJson(),
+    broadcast: broadcast,
+  );
+
+  Query$FetchPay? readQuery$FetchPay({
+    required Variables$Query$FetchPay variables,
+    bool optimistic = true,
+  }) {
+    final result = this.readQuery(
+      graphql.Request(
+        operation: graphql.Operation(document: documentNodeQueryFetchPay),
+        variables: variables.toJson(),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Query$FetchPay.fromJson(result);
+  }
+}
+
+class Query$FetchPay$fetchPay {
+  Query$FetchPay$fetchPay({
+    required this.id,
+    this.holdRequestTime,
+    this.payCaptureTime,
+    this.amountInCents,
     this.$__typename = 'Pay',
   });
 
-  factory Query$FetchPay$FetchPay.fromJson(Map<String, dynamic> json) {
-    final l$hold_request_time = json['hold_request_time'];
-    final l$pay_capture_time = json['pay_capture_time'];
-    final l$amount_in_cents = json['amount_in_cents'];
+  factory Query$FetchPay$fetchPay.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$holdRequestTime = json['holdRequestTime'];
+    final l$payCaptureTime = json['payCaptureTime'];
+    final l$amountInCents = json['amountInCents'];
     final l$$__typename = json['__typename'];
-    return Query$FetchPay$FetchPay(
-      hold_request_time: l$hold_request_time == null
+    return Query$FetchPay$fetchPay(
+      id: (l$id as String),
+      holdRequestTime: l$holdRequestTime == null
           ? null
-          : DateTime.parse((l$hold_request_time as String)),
-      pay_capture_time: l$pay_capture_time == null
+          : fromJsonIsoDateTime(l$holdRequestTime),
+      payCaptureTime: l$payCaptureTime == null
           ? null
-          : DateTime.parse((l$pay_capture_time as String)),
-      amount_in_cents: (l$amount_in_cents as int?),
+          : fromJsonIsoDateTime(l$payCaptureTime),
+      amountInCents: (l$amountInCents as int?),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final DateTime? hold_request_time;
+  final String id;
 
-  final DateTime? pay_capture_time;
+  final DateTime? holdRequestTime;
 
-  final int? amount_in_cents;
+  final DateTime? payCaptureTime;
+
+  final int? amountInCents;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$hold_request_time = hold_request_time;
-    _resultData['hold_request_time'] = l$hold_request_time?.toIso8601String();
-    final l$pay_capture_time = pay_capture_time;
-    _resultData['pay_capture_time'] = l$pay_capture_time?.toIso8601String();
-    final l$amount_in_cents = amount_in_cents;
-    _resultData['amount_in_cents'] = l$amount_in_cents;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$holdRequestTime = holdRequestTime;
+    _resultData['holdRequestTime'] = l$holdRequestTime == null
+        ? null
+        : toJsonIsoDateTime(l$holdRequestTime);
+    final l$payCaptureTime = payCaptureTime;
+    _resultData['payCaptureTime'] = l$payCaptureTime == null
+        ? null
+        : toJsonIsoDateTime(l$payCaptureTime);
+    final l$amountInCents = amountInCents;
+    _resultData['amountInCents'] = l$amountInCents;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -333,14 +486,16 @@ class Query$FetchPay$FetchPay {
 
   @override
   int get hashCode {
-    final l$hold_request_time = hold_request_time;
-    final l$pay_capture_time = pay_capture_time;
-    final l$amount_in_cents = amount_in_cents;
+    final l$id = id;
+    final l$holdRequestTime = holdRequestTime;
+    final l$payCaptureTime = payCaptureTime;
+    final l$amountInCents = amountInCents;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$hold_request_time,
-      l$pay_capture_time,
-      l$amount_in_cents,
+      l$id,
+      l$holdRequestTime,
+      l$payCaptureTime,
+      l$amountInCents,
       l$$__typename,
     ]);
   }
@@ -350,22 +505,27 @@ class Query$FetchPay$FetchPay {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$FetchPay$FetchPay || runtimeType != other.runtimeType) {
+    if (other is! Query$FetchPay$fetchPay || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$hold_request_time = hold_request_time;
-    final lOther$hold_request_time = other.hold_request_time;
-    if (l$hold_request_time != lOther$hold_request_time) {
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
-    final l$pay_capture_time = pay_capture_time;
-    final lOther$pay_capture_time = other.pay_capture_time;
-    if (l$pay_capture_time != lOther$pay_capture_time) {
+    final l$holdRequestTime = holdRequestTime;
+    final lOther$holdRequestTime = other.holdRequestTime;
+    if (l$holdRequestTime != lOther$holdRequestTime) {
       return false;
     }
-    final l$amount_in_cents = amount_in_cents;
-    final lOther$amount_in_cents = other.amount_in_cents;
-    if (l$amount_in_cents != lOther$amount_in_cents) {
+    final l$payCaptureTime = payCaptureTime;
+    final lOther$payCaptureTime = other.payCaptureTime;
+    if (l$payCaptureTime != lOther$payCaptureTime) {
+      return false;
+    }
+    final l$amountInCents = amountInCents;
+    final lOther$amountInCents = other.amountInCents;
+    if (l$amountInCents != lOther$amountInCents) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -377,54 +537,57 @@ class Query$FetchPay$FetchPay {
   }
 }
 
-extension UtilityExtension$Query$FetchPay$FetchPay on Query$FetchPay$FetchPay {
-  CopyWith$Query$FetchPay$FetchPay<Query$FetchPay$FetchPay> get copyWith =>
-      CopyWith$Query$FetchPay$FetchPay(this, (i) => i);
+extension UtilityExtension$Query$FetchPay$fetchPay on Query$FetchPay$fetchPay {
+  CopyWith$Query$FetchPay$fetchPay<Query$FetchPay$fetchPay> get copyWith =>
+      CopyWith$Query$FetchPay$fetchPay(this, (i) => i);
 }
 
-abstract class CopyWith$Query$FetchPay$FetchPay<TRes> {
-  factory CopyWith$Query$FetchPay$FetchPay(
-    Query$FetchPay$FetchPay instance,
-    TRes Function(Query$FetchPay$FetchPay) then,
-  ) = _CopyWithImpl$Query$FetchPay$FetchPay;
+abstract class CopyWith$Query$FetchPay$fetchPay<TRes> {
+  factory CopyWith$Query$FetchPay$fetchPay(
+    Query$FetchPay$fetchPay instance,
+    TRes Function(Query$FetchPay$fetchPay) then,
+  ) = _CopyWithImpl$Query$FetchPay$fetchPay;
 
-  factory CopyWith$Query$FetchPay$FetchPay.stub(TRes res) =
-      _CopyWithStubImpl$Query$FetchPay$FetchPay;
+  factory CopyWith$Query$FetchPay$fetchPay.stub(TRes res) =
+      _CopyWithStubImpl$Query$FetchPay$fetchPay;
 
   TRes call({
-    DateTime? hold_request_time,
-    DateTime? pay_capture_time,
-    int? amount_in_cents,
+    String? id,
+    DateTime? holdRequestTime,
+    DateTime? payCaptureTime,
+    int? amountInCents,
     String? $__typename,
   });
 }
 
-class _CopyWithImpl$Query$FetchPay$FetchPay<TRes>
-    implements CopyWith$Query$FetchPay$FetchPay<TRes> {
-  _CopyWithImpl$Query$FetchPay$FetchPay(this._instance, this._then);
+class _CopyWithImpl$Query$FetchPay$fetchPay<TRes>
+    implements CopyWith$Query$FetchPay$fetchPay<TRes> {
+  _CopyWithImpl$Query$FetchPay$fetchPay(this._instance, this._then);
 
-  final Query$FetchPay$FetchPay _instance;
+  final Query$FetchPay$fetchPay _instance;
 
-  final TRes Function(Query$FetchPay$FetchPay) _then;
+  final TRes Function(Query$FetchPay$fetchPay) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? hold_request_time = _undefined,
-    Object? pay_capture_time = _undefined,
-    Object? amount_in_cents = _undefined,
+    Object? id = _undefined,
+    Object? holdRequestTime = _undefined,
+    Object? payCaptureTime = _undefined,
+    Object? amountInCents = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
-    Query$FetchPay$FetchPay(
-      hold_request_time: hold_request_time == _undefined
-          ? _instance.hold_request_time
-          : (hold_request_time as DateTime?),
-      pay_capture_time: pay_capture_time == _undefined
-          ? _instance.pay_capture_time
-          : (pay_capture_time as DateTime?),
-      amount_in_cents: amount_in_cents == _undefined
-          ? _instance.amount_in_cents
-          : (amount_in_cents as int?),
+    Query$FetchPay$fetchPay(
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      holdRequestTime: holdRequestTime == _undefined
+          ? _instance.holdRequestTime
+          : (holdRequestTime as DateTime?),
+      payCaptureTime: payCaptureTime == _undefined
+          ? _instance.payCaptureTime
+          : (payCaptureTime as DateTime?),
+      amountInCents: amountInCents == _undefined
+          ? _instance.amountInCents
+          : (amountInCents as int?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -432,16 +595,17 @@ class _CopyWithImpl$Query$FetchPay$FetchPay<TRes>
   );
 }
 
-class _CopyWithStubImpl$Query$FetchPay$FetchPay<TRes>
-    implements CopyWith$Query$FetchPay$FetchPay<TRes> {
-  _CopyWithStubImpl$Query$FetchPay$FetchPay(this._res);
+class _CopyWithStubImpl$Query$FetchPay$fetchPay<TRes>
+    implements CopyWith$Query$FetchPay$fetchPay<TRes> {
+  _CopyWithStubImpl$Query$FetchPay$fetchPay(this._res);
 
   TRes _res;
 
   call({
-    DateTime? hold_request_time,
-    DateTime? pay_capture_time,
-    int? amount_in_cents,
+    String? id,
+    DateTime? holdRequestTime,
+    DateTime? payCaptureTime,
+    int? amountInCents,
     String? $__typename,
   }) => _res;
 }
