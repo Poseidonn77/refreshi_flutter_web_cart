@@ -1,8 +1,5 @@
 # Solution
 
-<!-- Filled in from the Claude Code session history (2026-11-13). Remaining _TODO_s
-     are things only you can answer (your reasons and opinions). -->
-
 ## Overview
 
 A web-only Flutter demo of a single-merchant grocery flow: catalog → cart →
@@ -10,8 +7,6 @@ checkout (with a delivery slot) → timed sign-in → order → order history. I
 with no backend: an offline demo GraphQL "server" keeps its data in the browser
 (Hive / IndexedDB), and a real server can be used instead with
 `--dart-define=GRAPHQL_ENDPOINT=…`.
-
-_TODO: one sentence on what the demo is meant to show (e.g. the assignment brief)._
 
 ## Architecture
 
@@ -76,7 +71,6 @@ behind it → `OrderController` polls when the next status change is due.
 - **What is stored:** current cart quantities, last cart ID, chosen delivery slot per
   order, sign-in flag, the GraphQL cache, and the whole demo DB (orders survive a
   reload).
-- **Why Hive:** _TODO (works on web via IndexedDB, typed boxes, no native setup…)._
 - **Reset:** DevTools → Application → Storage → Clear site data.
 
 ### Authentication (demo)
@@ -128,17 +122,17 @@ behind it → `OrderController` polls when the next status change is due.
 
 ## Trade-offs & limitations
 
-| Area | Trade-off made | Impact | With more time |
-| ---- | -------------- | ------ | -------------- |
-| Auth | Timed boolean, stored in Hive | No real identity or security | _TODO_ |
-| Backend | Offline demo DB in the browser by default | Data is per browser; no sync | _TODO_ |
-| Persistence | Delivery slot / DB kept locally | Clearing site data loses orders | _TODO_ |
-| Checkout | Three fixed slots, simulated payment hold/capture | Not a real schedule or PSP | _TODO_ |
-| Status | Client refreshes when a change is due | No push updates | _TODO_ |
-| Layout | Width breakpoints only | Height not considered | _TODO_ |
-| Hosting | Path URLs | Server needs `index.html` fallback | _TODO_ |
-| Testing | Manual verification during build; tests left for last | Suite is currently out of date and fails to compile | _TODO_ |
-| UI | Flow/UX done first | Visual polish still pending | _TODO_ |
+| Area | Trade-off made | Impact |
+| ---- | -------------- | ------ |
+| Auth | Timed boolean, stored in Hive | No real identity or security |
+| Backend | Offline demo DB in the browser by default | Data is per browser; no sync |
+| Persistence | Delivery slot / DB kept locally | Clearing site data loses orders |
+| Checkout | Three fixed slots, simulated payment hold/capture | Not a real schedule or PSP |
+| Status | Client refreshes when a change is due | No push updates |
+| Layout | Width breakpoints only | Height not considered |
+| Hosting | Path URLs | Server needs `index.html` fallback |
+| Testing | Manual verification during build; tests left for last | Suite is currently out of date and fails to compile |
+| UI | Flow/UX done first | Visual polish still pending |
 
 ## Testing
 
@@ -147,14 +141,13 @@ behind it → `OrderController` polls when the next status change is due.
 - **Existing tests (`test/`):** navigation, checkout slots, GraphQL queries against a
   mocked client, demo link, lenient scalars.
 - **Status:** out of date after the later changes (cart IDs, payment, `Nav`,
-  controllers) and currently fail to compile. _TODO: update them._
+  controllers) and currently fail to compile.
 - **Run:** `flutter test`.
 
 ## Future improvements
 
 - Update the test suite to the current flow.
 - Visual design pass on the UI.
-- _TODO: real auth, real backend + `placeOrder`, server-side slots, push status…_
 
 ## AI usage
 
@@ -162,8 +155,6 @@ Built with Claude Code across three sessions on 2026-11-13. I wrote the
 requirements and checked each step by hand in the browser; Claude
 implemented them, explained causes when bugs came up, and kept the README up to
 date.
-
-_TODO: what you reviewed or changed by hand, and what you'd not delegate._
 
 ### Prompt log
 
