@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart' show DefaultMaterialLocalizations;
 
@@ -10,6 +11,8 @@ import 'services/graphql_service.dart';
 import 'services/storage_service.dart';
 
 Future<void> main() async {
+  // Clean URLs (/orders) instead of the default hash URLs (/#/orders).
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   // Before runApp, so it handles browser URL edits ahead of the default
   // handler: an edited URL replaces the current page instead of stacking.

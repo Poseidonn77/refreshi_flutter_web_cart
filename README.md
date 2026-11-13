@@ -49,6 +49,18 @@ Sign-in is saved in Hive, so a page reload keeps you signed in; use **Sign out**
 Orders, the cart and the cart-id counter live in the browser's IndexedDB. To start
 fresh: Chrome DevTools → **Application** → **Storage** → **Clear site data**, then reload.
 
+## Deploying (clean URLs)
+
+The app uses path URLs (`/orders/123`, not `/#/orders/123`) via
+`usePathUrlStrategy()` in `lib/main.dart`. The browser now sends the route to the
+server, so a reload or deep link must be served `index.html` for any path, or it
+404s. `flutter run -d chrome` already does this; for hosting, add a fallback:
+
+- **Firebase Hosting** (`firebase.json`): `"rewrites": [{ "source": "**", "destination": "/index.html" }]`
+- **Netlify**: a `web/_redirects` file containing `/* /index.html 200`
+- **Nginx**: `try_files $uri /index.html;`
+- **Subfolder** (e.g. GitHub Pages): `flutter build web --base-href /your-repo/`
+
 ## Using a real GraphQL server
 
 ```sh
