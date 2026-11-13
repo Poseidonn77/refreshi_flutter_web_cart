@@ -11,6 +11,7 @@ class StorageService extends GetxService {
   static const String _boxName = 'app';
   static const String _lastCartIdKey = 'lastCartId';
   static const String _cartKey = 'cart';
+  static const String _signedInKey = 'signedIn';
   static String _orderSlotKey(String orderId) => 'orderSlot:$orderId';
 
   Box<dynamic>? _box;
@@ -21,6 +22,10 @@ class StorageService extends GetxService {
     _box ??= await Hive.openBox<dynamic>(_boxName);
     return this;
   }
+
+  /// Demo sign-in state, so a page reload keeps the user signed in.
+  bool get signedIn => box.get(_signedInKey) == true;
+  Future<void> setSignedIn(bool value) => box.put(_signedInKey, value);
 
   String? get lastCartId => box.get(_lastCartIdKey) as String?;
   Future<void> setLastCartId(String id) => box.put(_lastCartIdKey, id);
